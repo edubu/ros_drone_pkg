@@ -134,6 +134,18 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/ros_drone_pkg_node.cpp)
 
+add_executable(example_publisher src/example_publisher.cpp)
+add_dependencies(example_publisher ${example_publisher_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries( example_publisher
+  ${catkin_LIBRARIES}
+)
+
+add_executable(example_subscriber src/example_subscriber.cpp)
+add_dependencies(example_subscriber ${example_subscriber_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries( example_subscriber
+  ${catkin_LIBRARIES}
+)
+
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
