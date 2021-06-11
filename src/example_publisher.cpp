@@ -1,11 +1,27 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
-
 #include <sstream>
+
+#include "rc/mpu.h" 
+/* include the library that will allow imu reading */
+
+struct rc_mpu_config_t mpu_config
+struct rc_mpu_data_t mpu_data
+
 
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
+
+int rc_mpu_initialize( rc_mpu_data* data, rc_mpu_config conf) 
+/* set up the imu in normal one shot sampling mode, this will allow you to read sensor data at any time  */
+
+int rc_mpu_read_accel(rc_mpu_data* data);
+int rc_mpu_read_gyro(rc_mpu_data* data);
+int rc_mpu_read_temp(rc_mpu_data* data);
+int rc_mpu_read_mag(rc_mpu_data* data);
+/*read the imu data and store it in the data struct, NEED TO CREATE A DATA STRUCT */
+
 int main(int argc, char **argv)
 {
   /**
@@ -52,12 +68,18 @@ int main(int argc, char **argv)
    * A count of how many messages we have sent. This is used to create
    * a unique string for each message.
    */
+  
+
+  
   int count = 0;
   while (ros::ok())
   {
     /**
      * This is a message object. You stuff it with data, and then publish it.
      */
+    
+    /*use this to print the values. Use  mpu_data.accel[1],  mpu_data.accel[2], mpu_data.accel[3]*/
+    
     std_msgs::String msg;
 
     std::stringstream ss;
@@ -79,7 +101,11 @@ int main(int argc, char **argv)
     loop_rate.sleep();
     ++count;
   }
-
+  
 
   return 0;
 }
+
+int rc_mpu_power_off(void)
+  /**  rc_mpu_power_off() powers off the imu at the end of the reading 
+
