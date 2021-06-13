@@ -9,8 +9,24 @@ void chatterCallback(const std_msgs::String::ConstPtr& msg)
   ROS_INFO("I heard: [%s]", msg->data.c_str());
 }
 
+struct IMU_DATA {
+  double ACCEL_X;
+  double ACCEL_Y;
+  double ACCEL_Z;
+
+  double GYRO_X;
+  double GYRO_Y;
+  double GYRO_Y;
+
+  double MAG_X;
+  double MAG_Y;
+  double MAG_Z;
+};
+
 int main(int argc, char **argv)
 {
+  
+  IMU_DATA imu_data;
   /**
    * The ros::init() function needs to see argc and argv so that it can perform
    * any ROS arguments and name remapping that were provided at the command line.
