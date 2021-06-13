@@ -77,13 +77,26 @@ int main(int argc, char **argv)
     /**
      * This is a message object. You stuff it with data, and then publish it.
      */
-    
-    /*use this to print the values. Use  mpu_data.accel[1],  mpu_data.accel[2], mpu_data.accel[3]*/
+   
     
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << "hello world " << count;
+    /*ss << "hello world " << count;*/ 
+    ss << "Accel_X: " << data.accel[0]; 
+    ss << "Accel_Y: " << data.accel[1]; 
+    ss << "Accel_Z: " << data.accel[2]; 
+    
+    ss << "Gyro_X: " << data.gyro[0]; 
+    ss << "Gyro_Y: " << data.gyro[1]; 
+    ss << "Gyro_Z: " << data.gyro[2]; 
+    
+    ss << "Mag_X: " << data.mag[0]; 
+    ss << "Mag_Y: " << data.mag[1]; 
+    ss << "Mag_Z: " << data.mag[2]; 
+    
+    ss << "Temp: " << data.temp; 
+    
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());
@@ -107,5 +120,5 @@ int main(int argc, char **argv)
 }
 
 int rc_mpu_power_off(void)
-  /**  rc_mpu_power_off() powers off the imu at the end of the reading 
+  /*rc_mpu_power_off() powers off the imu at the end of the reading, need to include this if you use initialize*/ 
 
