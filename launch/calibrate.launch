@@ -1,0 +1,10 @@
+<launch>
+<arg name="params"/>
+<node
+    pkg="ros_drone_pkg"
+    type="calibrate"
+    name="calibrate_mpu"
+    args="$(arg params)"
+    output="screen"
+></node>
+</launch>
