@@ -9,41 +9,56 @@
 #include <string>
 #include <vector>
 #include <stdlib.h>
+#include "BB_MPU.h"
 
 #define I2C_BUS 2
 
-// IMU Variables
-typedef enum g_mode_t{
-        G_MODE_RAD,
-        G_MODE_DEG,
-        G_MODE_RAW
-} g_mode_t;
+struct mpuData {
+  double ACCEL_X;
+  double ACCEL_Y;
+  double ACCEL_Z;
 
-typedef enum a_mode_t{
-        A_MODE_MS2,
-        A_MODE_G,
-        A_MODE_RAW
-} a_mode_t;
+  double GYRO_X;
+  double GYRO_Y;
+  double GYRO_Z;
+
+  double MAG_X;
+  double MAG_Y;
+  double MAG_Z;
+};
 
 class RosDrone {
 
     public:
         // Constructor handles initialization of publishers and subscribers
-        RosDrone(ros::NodeHandle* nodehandle);
-
+        RosDrone(ros::NodeHandle *nodehandle);
 
     private:
+        // Helper classes
+        BB_MPU mpu;
+
         // Ros subscribers and publisher definitions
         ros::NodeHandle nh;
-        
-        ros::Subscriber minimal_subscriber;
-        ros::Publisher minimal_publisher;
+        ros::Subscriber mpu_sub;
+        int cycle_rate = 10;
+        int cycles;
 
-        void initializeSubscribers();
-        void initializePublishers();    
+        // Publishers
+        std::string mpuDataTopic;
+
+        // Helper structs
+        mpuData mpuD;
+
+        // Continuously runs while ros is stable
+        void run();
+
+        void initializeMPU(std::string pub_name, ros::NodeHandle *nodehandle);  
+
+        //PRINTS
+        void printMPU();
 
         // Parses and prints out data received by imu_publisher
-        void imu_subscriber_callback(const std_msgs::String::ConstPtr& msg);
+        void mpu_subscriber_callback(const std_msgs::String::ConstPtr& msg);
 
 };
 

@@ -1,0 +1,8 @@
+<launch>
+<node
+pkg="ros_drone_pkg"
+type="ros_drone"
+name="drone"
+output="screen"
+></node>
+</launch>

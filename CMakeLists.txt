@@ -124,6 +124,9 @@ include_directories(
 #   src/${PROJECT_NAME}/ros_drone_pkg.cpp
 # )
 
+add_library(librobotcontrol SHARED IMPORTED GLOBAL)
+set_target_properties(librobotcontrol PROPERTIES IMPORTED_LOCATION /usr/lib/librobotcontrol.so)
+
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
@@ -134,17 +137,26 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/ros_drone_pkg_node.cpp)
 
-add_executable(example_publisher src/example_publisher.cpp)
-add_dependencies(example_publisher ${example_publisher_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries( example_publisher
+add_executable(ros_drone  src/main.cpp src/RosDrone.cpp src/BB_MPU.h src/RosDrone.h)
+add_dependencies(ros_drone ${ros_drone_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(ros_drone
   ${catkin_LIBRARIES}
+  librobotcontrol
 )
 
-add_executable(example_subscriber src/example_subscriber.cpp)
-add_dependencies(example_subscriber ${example_subscriber_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries( example_subscriber
-  ${catkin_LIBRARIES}
-)
+# add_executable(example_publisher src/example_publisher.cpp)
+# add_dependencies(example_publisher ${example_publisher_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# target_link_libraries( example_publisher
+#   ${catkin_LIBRARIES}
+#   librobotcontrol
+# )
+
+# add_executable(example_subscriber src/example_subscriber.cpp)
+# add_dependencies(example_subscriber ${example_subscriber_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# target_link_libraries( example_subscriber
+#   ${catkin_LIBRARIES}
+#   librobotcontrol
+# )
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the

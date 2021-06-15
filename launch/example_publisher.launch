@@ -1,8 +1,0 @@
-<launch>
-<node
-pkg = "ros_drone_pkg"
-type="example_publisher"
-name="talker"
-output="screen"
-> </node>
-</launch>
