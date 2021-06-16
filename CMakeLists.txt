@@ -137,12 +137,22 @@ set_target_properties(librobotcontrol PROPERTIES IMPORTED_LOCATION /usr/lib/libr
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/ros_drone_pkg_node.cpp)
 
+# For main ros_drone executable
 add_executable(ros_drone  src/main.cpp src/RosDrone.cpp src/BB_MPU.h src/RosDrone.h)
 add_dependencies(ros_drone ${ros_drone_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(ros_drone
   ${catkin_LIBRARIES}
   librobotcontrol
 )
+
+# For calibration
+add_executable(calibrate src/calibrate.cpp)
+add_dependencies(calibrate ${calibrate_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(calibrate
+  ${catkin_LIBRARIES}
+  librobotcontrol
+)
+
 
 # add_executable(example_publisher src/example_publisher.cpp)
 # add_dependencies(example_publisher ${example_publisher_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})

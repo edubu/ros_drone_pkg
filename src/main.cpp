@@ -6,7 +6,7 @@ using namespace std;
 
 int main(int argc, char ** argv){
 
-    ROS_INFO("[INFO] Creating drone...");
+    ROS_INFO("Creating drone...");
 
     ros::init(argc, argv, "drone");
 

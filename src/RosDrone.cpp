@@ -1,7 +1,7 @@
 #include "RosDrone.h"
 
 RosDrone::RosDrone(ros::NodeHandle *nodehandle){
-    ROS_INFO("[INFO] Starting RosDrone class...");
+    ROS_INFO("Starting RosDrone class...");
 
     nh = *nodehandle;
 
@@ -23,7 +23,7 @@ void RosDrone::run(){
         ros::spinOnce();
     }
 
-    // Clean up
+    ROS_INFO("Cleaning up...");
     mpu.stop();
 }
 
@@ -77,7 +77,6 @@ void RosDrone::mpu_subscriber_callback(const std_msgs::String::ConstPtr &msg){
 }
 
 void RosDrone::printMPU(){
-    ROS_INFO("[INFO] ACCEL_X: %d; ACCEL_Y: %d; ACCEL_Z: %d; GYRO_X: %d; GYRO_Y: %d; GYRO_Z: %d; MAG_X: %d; MAG_Y: %d; MAG_Z: %d;",
+    ROS_INFO("ACCEL_X: %6.2f; ACCEL_Y: %6.2f; ACCEL_Z: %6.2f; GYRO_X: %6.1f; GYRO_Y: %6.1f; GYRO_Z: %6.1f; MAG_X: %6.1f; MAG_Y: %6.1f; MAG_Z: %6.1f;",
             mpuD.ACCEL_X, mpuD.ACCEL_Y, mpuD.ACCEL_Z, mpuD.GYRO_X, mpuD.GYRO_Y, mpuD.GYRO_Z, mpuD.MAG_X, mpuD.MAG_Y, mpuD.MAG_Z);
-
 }

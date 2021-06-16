@@ -41,9 +41,10 @@ class BB_MPU {
         }
 
         void init(std::string topic_name, ros::NodeHandle *nodehandle){
-            ROS_INFO("[INFO] Initializing mpu publisher...");
+            ROS_INFO("Initializing mpu publisher...");
 
             if(rc_mpu_initialize(&data, conf)){
+                ROS_INFO("rc_mpu_initialize_failed\n");
                 fprintf(stderr,"rc_mpu_initialize_failed\n");
                 return;
             }
@@ -51,6 +52,7 @@ class BB_MPU {
             this->topic_name = topic_name;
             nh = *nodehandle;
             mpu_pub = nh.advertise<std_msgs::String>(topic_name, 1);
+
         }
 
         // Called every loop on main -- publishes to /topic_name
@@ -74,7 +76,7 @@ class BB_MPU {
             // Clear current message
             ss.str(std::string());
 
-            /*ss << "hello world " << count;*/ 
+            ss.precision(2);
             ss << data.accel[0]; // Accel_X
             ss << " " << data.accel[1]; // Accel_Y
             ss << " " << data.accel[2]; // Accel_Z
