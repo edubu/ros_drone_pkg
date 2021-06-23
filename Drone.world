@@ -1,0 +1,209 @@
+<?xml version="1.0"?>
+<sdf version="1.5">
+
+
+  <world name="default">
+
+	<!-- A global light source -->
+	<include>
+  	<uri>model://sun</uri>
+	</include>
+
+	<!-- A ground plane -->
+	<include>
+  	<uri>model://ground_plane</uri>
+	</include>
+
+
+
+   	<model name="drone">
+
+     	<link name="base_link">
+       	<visual name = "base_visual">
+        	<pose>0 0 0.005 0 0 0</pose>>
+         	<geometry>
+           	<box> size="0.05 0.05 0.01" </box>
+         	</geometry>
+       	</visual>
+       	<collision name= "base_collision">
+          	<pose>0 0 0.005 0 0 0</pose>>
+          	<geometry>
+            	<box> size="0.05 0.05 0.01" </box>
+          	</geometry>
+        	</collision>
+     	</link>
+    
+
+     	<link name="FL">
+       	<visual name = "front_left_visual">
+        	<pose>0.5 0.5 0 0 0 0 </pose>
+         	<geometry>
+            	<cylinder>
+                	<length>0.03</length>
+                	<radius>0.13</radius>
+            	</cylinder>
+         	</geometry>
+       	</visual>
+
+       	<collision name = "front_left_collision">
+        	<pose>0.5 0.5 0 0 0 0 </pose>
+          	<geometry>
+            	<cylinder>
+                	<length>0.03</length>
+                	<radius>0.13</radius>
+             	</cylinder>
+          	</geometry>
+        	</collision>
+
+        	<inertial>
+           	<mass>0.2</mass>
+           	<inertia>
+                	<ixx>1.0</ixx>
+                	<iyy>1.0</iyy>
+                	<izz>1.0</izz>
+                	<ixy>0.0</ixy>
+                	<ixz>0.0</ixz>
+                	<iyz>0.0</iyz>
+           	</inertia>
+         	</inertial>
+
+     	</link>
+
+
+
+     	<link name="FR">
+       	<visual name = "front_right_visual">
+        	<pose>0.5 -0.5 0 0 0 0 </pose>
+         	<geometry>
+            	<cylinder>
+                	<length>0.03</length>
+                	<radius>0.13</radius>
+            	</cylinder>
+         	</geometry>
+       	</visual>
+
+       	<collision name = "front_right_collision">
+        	<pose>0.5 -0.5 0 0 0 0 </pose>
+          	<geometry>
+            	<cylinder>
+                	<length>0.03</length>
+                	<radius>0.13</radius>
+             	</cylinder>
+          	</geometry>
+        	</collision>
+
+        	<inertial>
+           	<mass>0.2</mass>
+           	<inertia>
+                	<ixx>1.0</ixx>
+                	<iyy>1.0</iyy>
+                	<izz>1.0</izz>
+                	<ixy>0.0</ixy>
+                	<ixz>0.0</ixz>
+                	<iyz>0.0</iyz>
+           	</inertia>
+         	</inertial>
+
+     	</link>
+
+
+
+     	<link name="BL">
+       	<visual name = "back_left_visual">
+        	<pose>-0.5 0.5 0 0 0 0 </pose>
+         	<geometry>
+            	<cylinder>
+                	<length>0.03</length>
+                	<radius>0.13</radius>
+            	</cylinder>
+         	</geometry>
+       	</visual>
+
+       	<collision name = "back_left_collision">
+        	<pose>-0.5 0.5 0 0 0 0 </pose>
+          	<geometry>
+            	<cylinder>
+                	<length>0.03</length>
+                	<radius>0.13</radius>
+             	</cylinder>
+          	</geometry>
+        	</collision>
+
+        	<inertial>
+           	<mass>0.2</mass>
+           	<inertia>
+                	<ixx>1.0</ixx>
+                	<iyy>1.0</iyy>
+                	<izz>1.0</izz>
+                	<ixy>0.0</ixy>
+                	<ixz>0.0</ixz>
+                	<iyz>0.0</iyz>
+           	</inertia>
+         	</inertial>
+
+     	</link>
+
+
+
+     	<link name="BR">
+       	<visual name = "back_right_visual">
+        	<pose>-0.5 -0.5 0 0 0 0 </pose>
+         	<geometry>
+            	<cylinder>
+                	<length>0.03</length>
+                	<radius>0.13</radius>
+            	</cylinder>
+         	</geometry>
+       	</visual>
+
+       	<collision name = "back_right_collision">
+        	<pose>-0.5 -0.5 0 0 0 0 </pose>
+          	<geometry>
+            	<cylinder>
+                	<length>0.03</length>
+                	<radius>0.13</radius>
+             	</cylinder>
+          	</geometry>
+        	</collision>
+
+        	<inertial>
+           	<mass>0.2</mass>
+           	<inertia>
+                	<ixx>1.0</ixx>
+                	<iyy>1.0</iyy>
+                	<izz>1.0</izz>
+                	<ixy>0.0</ixy>
+                	<ixz>0.0</ixz>
+                	<iyz>0.0</iyz>
+           	</inertia>
+         	</inertial>
+
+     	</link>
+   	 
+
+
+     	<joint name="base_to_FL" type="fixed">
+       	<parent>base_link</parent>
+       	<child>FL</child>
+     	</joint>
+
+     	<joint name="base_to_FR" type="fixed">
+       	<parent>base_link</parent>
+       	<child>FR</child>
+     	</joint>
+
+     	<joint name="base_to_BL" type="fixed">
+       	<parent>base_link</parent>
+       	<child>BL</child>
+     	</joint>
+
+     	<joint name="base_to_BR" type="fixed">
+       	<parent>base_link</parent>
+       	<child>BR</child>
+     	</joint>
+
+
+
+</model>
+	</world>
+</sdf>
